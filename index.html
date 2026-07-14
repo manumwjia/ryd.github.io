@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Practica 2 Prof. Gilberto</title>
+
+</head>
+
+<body>
+
+ <h1>Servicio que recibe y devuelve JSON</h1>
+
+ <p><button id="boton">Envía y recibe JSON</button></p>
+
+ <script type="module">
+
+  import { consume } from "./libclienteweb/consume.js"
+  import { enviaJsonRecibeJson } from "./libclienteweb/enviaJsonRecibeJson.js"
+  import { muestraError } from "./libclienteweb/muestraError.js"
+
+  boton.addEventListener("click", procesaJson)
+
+  async function procesaJson() {
+   try {
+    const datos = {
+     saludo: "Hola,",
+     nombre: "Manuel Mejia"
+    }
+    const respuesta = await consume(
+     enviaJsonRecibeJson(
+      "api/json.php", datos))
+    const json =
+     await respuesta.json()
+    alert(json)
+   } catch (error) {
+    muestraError(error)
+   }
+  }
+
+ </script>
+ <center>
+<footer>
+    <p>&copy; 2026 Manuel Israel Mejía Avendaño</p>
+</footer></center>
+</body> 
+
+</html>
